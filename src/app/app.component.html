@@ -2,10 +2,26 @@
   <div class="row">
     <div class="col-xs-12">
       <h1>Animations</h1>
-      <button class="btn btn-primary">Animate!</button>
-      <button class="btn btn-primary">Shrink!</button>
+      <button
+        (click)="onAnimate()"
+        class="btn btn-primary"
+      >Animate!</button>
+      <button
+        (click)="onShrink()"
+        class="btn btn-primary"
+      >Shrink!</button>
       <hr>
-      <div></div>
+      <div
+        style="width: 100px; height: 100px;"
+        [@divState]="state"
+        (@divState.start)="animationStarted($event)"
+        (@divState.done)="animationEnded($event)"
+      ></div>
+      <br>
+      <div
+        style="width: 100px; height: 100px;"
+        [@wildState]="wildState"
+      ></div>
     </div>
   </div>
   <hr>
@@ -17,8 +33,9 @@
       <ul class="list-group">
         <li
           class="list-group-item"
-          (click)="onDelete(item)"
-          *ngFor="let item of list">
+          (click)="onDelete(i)"
+          [@list1]
+          *ngFor="let item of list; let i = index">
           {{ item }}
         </li>
       </ul>
@@ -30,8 +47,9 @@
       <ul class="list-group">
         <li
           class="list-group-item"
-          (click)="onDelete(item)"
-          *ngFor="let item of list">
+          (click)="onDelete(i)"
+          [@list2]
+          *ngFor="let item of list; let i = index">
           {{ item }}
         </li>
       </ul>
